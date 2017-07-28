@@ -47,6 +47,7 @@ def send_message(users, pr, owner):
             username="GitSlack"
             )
 
+
 if __name__ == '__main__':
     result = {}
     g = Github(os.environ['GITHUB_USER'], os.environ['GITHUB_TOKEN'], api_preview=True)
