@@ -7,14 +7,7 @@ from github import Github
 def get_latest_PR(events):
     for event in events:
         if event.type == 'PullRequestEvent' and event.payload['action'] == 'opened':
-            print(event.payload)
             return event.payload
-
-            # return {
-            #     'pr_number': event.payload['number'],
-            #     'owner': event.payload['pull_request']['user']['login'],
-            #     'pr_url': event.payload['pull_request']['html_url']
-            # }
 
 def get_emails(reviewers, owner_email):
     im_list = sc.api_call("users.list")
@@ -34,7 +27,6 @@ def send_message(users, pr, owner):
     for user in users:
         sc.api_call("chat.postMessage",
             channel="@{}".format(user),
-            # text="@{0} wants your review - {1}".format(owner, pr_url),
             attachments=[
                 {
                     "fallback": "@{0} wants your review - {1}".format(owner, pr['pull_request']['html_url']),
